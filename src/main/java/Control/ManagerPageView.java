@@ -4,7 +4,7 @@
  */
 package Control;
 
-import Model.WebPages; //Se importa o no el nombre del arraylist??
+import Model.WebPages; 
 import java.util.List;
 /**
  *

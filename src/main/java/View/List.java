@@ -4,7 +4,6 @@
  */
 package View;
 
-import javax.swing.JTable;
 import Control.Manage;
 
 /**
@@ -99,8 +98,8 @@ public class List extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Manage tabla = new Manage();
-        tabla.printTable(jTable1);
+        Manage table = new Manage();
+        table.printTable(jTable1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
