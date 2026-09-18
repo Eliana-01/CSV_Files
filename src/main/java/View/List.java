@@ -41,7 +41,6 @@ public class List extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 2, 16)); // NOI18N
         jButton1.setText("Consult Pages");
         jButton1.setToolTipText("click here");
-        jButton1.setActionCommand("Consult Pages");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

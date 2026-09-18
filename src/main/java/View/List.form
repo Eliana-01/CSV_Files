@@ -70,7 +70,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Consult Pages"/>
         <Property name="toolTipText" type="java.lang.String" value="click here"/>
-        <Property name="actionCommand" type="java.lang.String" value="Consult Pages"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
