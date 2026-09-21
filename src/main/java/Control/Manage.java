@@ -20,9 +20,7 @@ public class Manage implements ManagerPageView{
         CSV_Reader read = new CSV_Reader();
         return read.readFile("Pages_1000.csv");
     }
-    public void printTable(JTable table) {
-    List<WebPages> list = pagesView();
-
+    public void printTable(JTable table, List<WebPages> list) {
     DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
     tableModel.setRowCount(0); // Limpia filas previas
 
@@ -36,6 +34,9 @@ public class Manage implements ManagerPageView{
             page.getExtractionTask()
         });
     }
+}
+    public void printTable(JTable table) {
+    printTable(table, pagesView()); // Llama al método de arriba pasándole la lista completa
 }
     public List<WebPages> search(List<WebPages> list, String indexSearch, String pageTitleSearch){
         List<WebPages> result = new ArrayList();

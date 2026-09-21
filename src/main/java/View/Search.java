@@ -6,6 +6,7 @@ package View;
 import Model.WebPages;
 import Control.CSV_Reader;
 import Control.Manage;
+import java.util.List;
 
 /**
  *
@@ -50,6 +51,12 @@ public class Search extends javax.swing.JFrame {
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
             }
         });
 
@@ -113,8 +120,8 @@ public class Search extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -122,20 +129,27 @@ public class Search extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Manage logic = new Manage();
-        List<WebPages> list = logic.pagesView();
+        CSV_Reader read = new CSV_Reader();
+        List<WebPages> list = read.readFile("Pages_1000.csv");
         
         String index = jTextField1.getText();
         String pageTitle = jTextField2.getText();
         
-        List<WebPages> filter = searchPage.search(list, index, pageTitle);
-        searchPage.printTable(jTable1, filter);
+        Manage manage = new Manage();
+        
+        List<WebPages> filter = manage.search(list, index, pageTitle);
+        manage.printTable(jTable1, filter);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        // TODO add your handling code here:
+        jButton1ActionPerformed(null);
+    }//GEN-LAST:event_jTextField2KeyReleased
 
     /**
      * @param args the command line arguments
