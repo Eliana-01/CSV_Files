@@ -5,6 +5,7 @@
 package Control;
 
 import Model.WebPages;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
@@ -36,6 +37,22 @@ public class Manage implements ManagerPageView{
         });
     }
 }
-    
+    public List<WebPages> search(List<WebPages> list, String indexSearch, String pageTitleSearch){
+        List<WebPages> result = new ArrayList();
+        
+        String index = indexSearch.trim();
+        String pageTitle = pageTitleSearch.trim().toLowerCase(); //equalsIgnoreCase
+        
+        for (WebPages page: list){
+            boolean equalsIndex = index.isEmpty() || String.valueOf(page.getIndex()).equals(index);
+            boolean equalsPageTitle = pageTitle.isEmpty() || page.getPageTitle().toLowerCase().contains(pageTitle);
+            
+            if (equalsIndex && equalsPageTitle){
+                result.add(page);
+            }
+        }
+        return result;
+    }
+
 }
 
