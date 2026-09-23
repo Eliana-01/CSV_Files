@@ -16,7 +16,7 @@ public class WebPages {
     private String pageText;
     private String extractionTask;
     
-    public WebPages(){ 
+    public WebPages(String index1, String pageID1, String url1, String pageTitle1, String pageText1, String extractionTask1){ 
     }
 
     public WebPages(int index, String pageID, String url, String pageTitle, String pageText, String extractionTask) {

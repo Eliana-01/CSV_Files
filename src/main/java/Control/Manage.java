@@ -38,17 +38,17 @@ public class Manage implements ManagerPageView{
     public void printTable(JTable table) {
     printTable(table, pagesView()); // Llama al método de arriba pasándole la lista completa
 }
-    public List<WebPages> search(List<WebPages> list, String indexSearch, String pageTitleSearch){
+    public List<WebPages> search(List<WebPages> list, String indexSearch, String pageIDSearch){
         List<WebPages> result = new ArrayList();
         
         String index = indexSearch.trim();
-        String pageTitle = pageTitleSearch.trim().toLowerCase(); //equalsIgnoreCase
+        String pageID = pageIDSearch.trim().toLowerCase(); //equalsIgnoreCase
         
         for (WebPages page: list){
             boolean equalsIndex = index.isEmpty() || String.valueOf(page.getIndex()).equals(index);
-            boolean equalsPageTitle = pageTitle.isEmpty() || page.getPageTitle().toLowerCase().contains(pageTitle);
+            boolean equalsPageID = pageID.isEmpty() || page.getPageID().toLowerCase().contains(pageID);
             
-            if (equalsIndex && equalsPageTitle){
+            if (equalsIndex && equalsPageID){
                 result.add(page);
             }
         }
