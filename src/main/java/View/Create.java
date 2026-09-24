@@ -157,6 +157,7 @@ public class Create extends javax.swing.JPanel {
         Root.web.add(create);
         CSV_Reader save = new CSV_Reader();
         save.SaveCSV(Root.web);
+        javax.swing.JOptionPane.showMessageDialog(this, "Record Add Successfully");
 
         jTextField1.setText("");
         jTextField2.setText("");

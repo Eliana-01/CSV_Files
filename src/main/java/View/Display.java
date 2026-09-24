@@ -34,7 +34,7 @@ public class Display extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(680, 420));
 
-        jButton1.setFont(new java.awt.Font("Kinnari", 2, 15)); // NOI18N
+        jButton1.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         jButton1.setText("Consult Pages");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
