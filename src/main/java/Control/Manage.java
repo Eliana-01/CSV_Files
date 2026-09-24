@@ -20,6 +20,7 @@ public class Manage implements ManagerPageView{
         CSV_Reader read = new CSV_Reader();
         return read.readFile("Pages_1000.csv");
     }
+    @Override
     public void printTable(JTable table, List<WebPages> list) {
     DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
     tableModel.setRowCount(0); // Limpia filas previas
@@ -38,6 +39,7 @@ public class Manage implements ManagerPageView{
     public void printTable(JTable table) {
     printTable(table, pagesView()); // Llama al método de arriba pasándole la lista completa
 }
+    @Override
     public List<WebPages> search(List<WebPages> list, String indexSearch, String pageIDSearch){
         List<WebPages> result = new ArrayList();
         

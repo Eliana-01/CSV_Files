@@ -76,16 +76,7 @@ public class WebPages {
     }
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("WebPages{");
-        sb.append("index=").append(index);
-        sb.append(", pageID=").append(pageID);
-        sb.append(", url=").append(url);
-        sb.append(", pageTitle=").append(pageTitle);
-        sb.append(", pageText=").append(pageText);
-        sb.append(", extractionTask=").append(extractionTask);
-        sb.append('}');
-        return sb.toString();
+        return index + "," + pageID + "," + url + "," + pageTitle + "," + pageText + "," + extractionTask;
     }
     
     

@@ -4,7 +4,11 @@
  */
 package View;
 
+import Control.CSV_Reader;
+import Model.WebPages;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -16,8 +20,12 @@ public class Root extends javax.swing.JFrame {
     /**
      * Creates new form Root
      */
+    public static List<WebPages> web = new ArrayList();
+    
     public Root() {
         initComponents();
+        CSV_Reader r = new CSV_Reader();
+        web = r.readFile("Pages_1000.csv");
         
     }
     private void ShowPanel(JPanel p){

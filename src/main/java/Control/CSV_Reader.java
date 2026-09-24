@@ -52,6 +52,16 @@ public class CSV_Reader {
 
         return list;
     }
+    
+    public void SaveCSV(List<WebPages> newList){
+       try (PrintWriter pw = new PrintWriter(new FileWriter("Pages_1000.csv", false))) {
+           for (WebPages obj : newList){
+               pw.println(obj.toString()); //Mi metodo cual es el nombre
+           }   
+        }catch (IOException e){
+            System.out.println("Error al guardar en el archivo: "+ e.getMessage());
+        }
+    }
     public static void main(String[] args) throws IOException { //Verificacion que todo esta bien con el archivo csv
         Scanner s = null; 
         try {

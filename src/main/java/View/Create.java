@@ -4,6 +4,7 @@
  */
 package View;
 
+import Control.CSV_Reader;
 import Model.WebPages;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,7 +153,10 @@ public class Create extends javax.swing.JPanel {
         
         WebPages create = new WebPages(index, pageID, url, pageTitle, pageText, extractionTask);
         
-        web.add(create);        
+        //web.add(create); 
+        Root.web.add(create);
+        CSV_Reader save = new CSV_Reader();
+        save.SaveCSV(Root.web);
 
         jTextField1.setText("");
         jTextField2.setText("");

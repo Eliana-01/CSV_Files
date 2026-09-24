@@ -71,6 +71,11 @@ public class Search extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jButton2.setText("Delete register");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -139,6 +144,35 @@ public class Search extends javax.swing.JPanel {
         manage.printTable(jTable1, filter);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String index = jTextField1.getText().trim();
+        String ID = jTextField2.getText().trim();
+        
+        if (index.isEmpty() && ID.isEmpty()){
+            return;
+        }
+        Root.web.removeIf(page ->{
+            boolean equalsIndex = false;
+            boolean equalsID = false;
+            
+            if (!index.isEmpty()){
+                equalsIndex = (page.getIndex() == Integer.parseInt(index));
+            }
+            if (!ID.isEmpty()){
+                equalsID = (page.getPageID().equalsIgnoreCase(ID));
+            }
+            return equalsIndex || equalsID; 
+        });
+        CSV_Reader r = new CSV_Reader();
+        r.SaveCSV(Root.web);
+        
+        javax.swing.JOptionPane.showMessageDialog(this, "Record Deleted Successfully");
+        jTextField1.setText("");
+        jTextField2.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

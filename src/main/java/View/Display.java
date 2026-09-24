@@ -34,7 +34,7 @@ public class Display extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(680, 420));
 
-        jButton1.setFont(new java.awt.Font("Kinnari", 1, 15)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Kinnari", 2, 15)); // NOI18N
         jButton1.setText("Consult Pages");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,8 +71,8 @@ public class Display extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
