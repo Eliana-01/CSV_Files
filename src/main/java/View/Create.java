@@ -6,8 +6,7 @@ package View;
 
 import Control.CSV_Reader;
 import Model.WebPages;
-import java.util.ArrayList;
-import java.util.List;
+import Control.Manage;
 
 /**
  *
@@ -18,7 +17,6 @@ public class Create extends javax.swing.JPanel {
     /**
      * Creates new form Create
      */
-    private List<WebPages> web  = new ArrayList();
     
     public Create() {
         initComponents();
@@ -144,27 +142,11 @@ public class Create extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int index = Integer.parseInt(jTextField1.getText());
-        String pageID = jTextField2.getText();
-        String url = jTextField3.getText();
-        String pageTitle = jTextField4.getText();
-        String pageText = jTextField5.getText();
-        String extractionTask = jTextField6.getText();
+        Manage m = new Manage();
+        m.register(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField6.getText());
         
-        WebPages create = new WebPages(index, pageID, url, pageTitle, pageText, extractionTask);
-        
-        //web.add(create); 
-        Root.web.add(create);
-        CSV_Reader save = new CSV_Reader();
-        save.SaveCSV(Root.web);
-        javax.swing.JOptionPane.showMessageDialog(this, "Record Add Successfully");
-
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");   
+        javax.swing.JOptionPane.showMessageDialog(this, "Record Add Successfully"); //Dentro de un condicional
+        m.clean(jTextField1, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

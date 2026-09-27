@@ -7,6 +7,8 @@ package Control;
 import Model.WebPages; 
 import java.util.List;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author EstudianteLIS
@@ -15,4 +17,18 @@ public interface ManagerPageView {
     List<WebPages> pagesView();
     public void printTable(JTable table, List<WebPages> list);
     public List<WebPages> search(List<WebPages> list, String indexSearch, String pageIDSearch);
+    public void clean(JTextField... fields);
 }
+
+//Cargar los objetos desde display hasta search y eliminar
+
+//Funcion para actualizar datos
+
+//Arreglar el metodo buscar, su boton de eliminar
+
+//Conservar la interface??
+
+//Agregar el informe PDF
+
+//Validaciones
+    //Actualizar: que se cambie almenos un campo, y que el dato seleccionado en la tabla ya aparezca cargargo ahi.

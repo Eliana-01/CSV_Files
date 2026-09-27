@@ -4,6 +4,8 @@
  */
 package Model;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author EstudianteLIS
@@ -16,7 +18,7 @@ public class WebPages {
     private String pageText;
     private String extractionTask;
     
-    public WebPages(String index1, String pageID1, String url1, String pageTitle1, String pageText1, String extractionTask1){ 
+    public WebPages(int Index, JTextField pageID1, JTextField url1, JTextField pageTitle1, JTextField pageText1, JTextField extractionTask1){ 
     }
 
     public WebPages(int index, String pageID, String url, String pageTitle, String pageText, String extractionTask) {

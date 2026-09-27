@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
+import Control.Manage;
 
 /**
  *
@@ -20,10 +21,12 @@ public class Root extends javax.swing.JFrame {
     /**
      * Creates new form Root
      */
-    public static List<WebPages> web = new ArrayList();
+    Manage m = new Manage();
+    List<WebPages> web = m.pagesView();
     
     public Root() {
         initComponents();
+        this.setLocationRelativeTo(null);
         CSV_Reader r = new CSV_Reader();
         web = r.readFile("Pages_1000.csv");
         
@@ -51,6 +54,7 @@ public class Root extends javax.swing.JFrame {
         search = new javax.swing.JButton();
         create = new javax.swing.JButton();
         content = new javax.swing.JPanel();
+        update = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,40 +95,50 @@ public class Root extends javax.swing.JFrame {
             .addGap(0, 420, Short.MAX_VALUE)
         );
 
+        update.setText("Update Data");
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(280, 280, 280))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(display)
-                        .addGap(155, 155, 155)
-                        .addComponent(search)
-                        .addGap(124, 124, 124)
-                        .addComponent(create)
-                        .addGap(216, 216, 216))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(201, 201, 201))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(display)
+                .addGap(18, 18, 18)
+                .addComponent(search)
+                .addGap(18, 18, 18)
+                .addComponent(create)
+                .addGap(18, 18, 18)
+                .addComponent(update)
+                .addGap(200, 200, 200))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(192, 192, 192)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(42, 42, 42)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(display)
                     .addComponent(search)
-                    .addComponent(create))
-                .addGap(51, 51, 51)
+                    .addComponent(create)
+                    .addComponent(update))
+                .addGap(18, 18, 18)
                 .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,6 +161,12 @@ public class Root extends javax.swing.JFrame {
         Create c = new Create();
         ShowPanel(c);
     }//GEN-LAST:event_createActionPerformed
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        // TODO add your handling code here:
+        Update u = new Update();
+        ShowPanel(u);
+    }//GEN-LAST:event_updateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,5 +209,6 @@ public class Root extends javax.swing.JFrame {
     private javax.swing.JButton display;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton search;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

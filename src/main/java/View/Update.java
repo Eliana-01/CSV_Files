@@ -4,21 +4,17 @@
  */
 package View;
 
-import Control.Manage;
-
 /**
  *
- * @author EstudianteLIS
+ * @author eliana
  */
-public class Display extends javax.swing.JPanel {
+public class Update extends javax.swing.JPanel {
 
     /**
-     * Creates new form Display
+     * Creates new form Update
      */
-    public Display() {
+    public Update() {
         initComponents();
-        Manage table = new Manage();
-        table.printTable(jTable1);
     }
 
     /**
@@ -30,42 +26,22 @@ public class Display extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-
         setPreferredSize(new java.awt.Dimension(680, 420));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Index", "Page ID", "URL", "Page Title", "Page Text", "Extraction Task"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 680, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 418, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
