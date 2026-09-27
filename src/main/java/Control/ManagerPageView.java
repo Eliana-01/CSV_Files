@@ -18,13 +18,13 @@ public interface ManagerPageView {
     public void printTable(JTable table, List<WebPages> list);
     public List<WebPages> search(List<WebPages> list, String indexSearch, String pageIDSearch);
     public void clean(JTextField... fields);
+    public void register(String index, String pageID, String url, String pageTitle, String pageText, String extractionTask);
+    public void delete(String indexSearch, String pageIDSearch);
 }
 
 //Cargar los objetos desde display hasta search y eliminar
 
 //Funcion para actualizar datos
-
-//Arreglar el metodo buscar, su boton de eliminar
 
 //Conservar la interface??
 

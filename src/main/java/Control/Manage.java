@@ -72,6 +72,7 @@ public class Manage implements ManagerPageView{
             }
         }
     }
+    @Override
     public void register(String index, String pageID, String url, String pageTitle, String pageText, String extractionTask){
         if (index.trim().isEmpty() || pageID.trim().isEmpty() || url.trim().isEmpty() || 
         pageTitle.trim().isEmpty() || pageText.trim().isEmpty() || extractionTask.trim().isEmpty()) {
@@ -103,6 +104,7 @@ public class Manage implements ManagerPageView{
         CSV_Reader save = new CSV_Reader();
         save.SaveCSV(this.pages);
     }
+    @Override
     public void delete(String indexSearch, String pageIDSearch) {
         String index = indexSearch.trim();
         String ID = pageIDSearch.trim();
@@ -120,13 +122,13 @@ public class Manage implements ManagerPageView{
             if (confirmation != JOptionPane.YES_OPTION) {
                 return;
             }
-            boolean eliminado = this.pages.removeIf(page -> {
+            boolean delete = this.pages.removeIf(page -> {
                 boolean equalsIndex = index.isEmpty() || (page.getIndex() == targetIndex);
                 boolean equalsID = ID.isEmpty() || page.getPageID().equalsIgnoreCase(ID);
 
                 return equalsIndex && equalsID;
             });
-            if (eliminado) {
+            if (delete) {
                 addCSV();
                 JOptionPane.showMessageDialog(null,"Record delete  successfully.","SUCCESS",JOptionPane.INFORMATION_MESSAGE);
             } else {

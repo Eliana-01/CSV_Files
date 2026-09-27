@@ -144,8 +144,7 @@ public class Create extends javax.swing.JPanel {
         // TODO add your handling code here:
         Manage m = new Manage();
         m.register(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField6.getText());
-        
-        javax.swing.JOptionPane.showMessageDialog(this, "Record Add Successfully"); //Dentro de un condicional
+       
         m.clean(jTextField1, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6);
     }//GEN-LAST:event_jButton1ActionPerformed
 
