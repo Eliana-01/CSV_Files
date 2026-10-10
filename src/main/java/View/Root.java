@@ -21,8 +21,13 @@ public class Root extends javax.swing.JFrame {
     /**
      * Creates new form Root
      */
-    Manage m = new Manage();
-    List<WebPages> web = m.pagesView();
+    private Manage manage = new Manage();
+    
+    List<WebPages> web = this.manage.pagesView();
+    
+    private Search panelSearch;
+    private Create panelCreate;
+    private Display panelDisplay;
     
     public Root() {
         initComponents();
@@ -30,6 +35,14 @@ public class Root extends javax.swing.JFrame {
         CSV_Reader r = new CSV_Reader();
         web = r.readFile("Pages_1000.csv");
         
+        panelSearch = new Search();
+        panelSearch.setManage(this.manage);
+        
+        panelCreate = new Create();
+        panelCreate.setManage(this.manage);
+        
+        panelDisplay = new Display();
+        panelDisplay.setManage(this.manage);
     }
     private void ShowPanel(JPanel p){
         p.setSize(680, 420);
@@ -139,20 +152,18 @@ public class Root extends javax.swing.JFrame {
 
     private void displayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayActionPerformed
         // TODO add your handling code here:
-        Display l = new Display();
-        ShowPanel(l);
+        panelDisplay.refreshTable();
+        ShowPanel(panelDisplay);
     }//GEN-LAST:event_displayActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
-        Search s = new Search();
-        ShowPanel(s);
+        ShowPanel(panelSearch);
     }//GEN-LAST:event_searchActionPerformed
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         // TODO add your handling code here:
-        Create c = new Create();
-        ShowPanel(c);
+        ShowPanel(panelCreate);
     }//GEN-LAST:event_createActionPerformed
 
     /**

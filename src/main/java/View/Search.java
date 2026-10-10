@@ -18,6 +18,11 @@ public class Search extends javax.swing.JPanel {
     /**
      * Creates new form Search
      */
+    private Manage manage;
+    
+    public void setManage(Manage manage){
+        this.manage = manage;
+    }
     public Search() {
         initComponents();
         

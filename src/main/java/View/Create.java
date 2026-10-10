@@ -17,7 +17,11 @@ public class Create extends javax.swing.JPanel {
     /**
      * Creates new form Create
      */
+    private Manage manage;
     
+    public void setManage(Manage manage){
+        this.manage = manage;
+    }
     public Create() {
         initComponents();
     }
