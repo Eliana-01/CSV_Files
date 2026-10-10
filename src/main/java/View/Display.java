@@ -17,19 +17,21 @@ public class Display extends javax.swing.JPanel {
      * Creates new form Display
      */
     public void refreshTable() {
-    if (this.manage != null) {
-        this.manage.printTable(jTable1); // Vuelve a cargar los datos en la JTable
-    }
+        if (this.manage != null) {
+            this.manage.printTable(jTable1); // Vuelve a cargar los datos en la JTable
+        }
     }
     private Manage manage;
-    
-    public void setManage(Manage manage){
+
+    public void setManage(Manage manage) {
         this.manage = manage;
         refreshTable();
     }
+
     public Display() {
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,7 +103,7 @@ public class Display extends javax.swing.JPanel {
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
         // TODO add your handling code here:
         int SelectedRow = jTable1.getSelectedRow();
-        if (SelectedRow == -1){
+        if (SelectedRow == -1) {
             JOptionPane.showMessageDialog(null, "Please select a row from the table", "No Row Selected", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -113,9 +115,63 @@ public class Display extends javax.swing.JPanel {
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_UpdateActionPerformed
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null,"Please select a row from the table first.","No Row Selected",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int indexActual = Integer.parseInt(jTable1.getValueAt(selectedRow, 0).toString());
+        String pageIDActual = jTable1.getValueAt(selectedRow, 1).toString();
+        String urlActual = jTable1.getValueAt(selectedRow, 2).toString();
+        String titleActual = jTable1.getValueAt(selectedRow, 3).toString();
+        String textActual = jTable1.getValueAt(selectedRow, 4).toString();
+        String taskActual = jTable1.getValueAt(selectedRow, 5).toString();
 
+        javax.swing.JTextField txtPageID = new javax.swing.JTextField(pageIDActual);
+        javax.swing.JTextField txtUrl = new javax.swing.JTextField(urlActual);
+        javax.swing.JTextField txtTitle = new javax.swing.JTextField(titleActual);
+        javax.swing.JTextField txtText = new javax.swing.JTextField(textActual);
+        javax.swing.JTextField txtTask = new javax.swing.JTextField(taskActual);
+
+        javax.swing.JPanel panelFormulario = new javax.swing.JPanel(new java.awt.GridLayout(0, 1, 4, 4));
+        panelFormulario.add(new javax.swing.JLabel("Index (Not editable): " + indexActual));
+        panelFormulario.add(new javax.swing.JLabel("Page ID:"));
+        panelFormulario.add(txtPageID);
+        panelFormulario.add(new javax.swing.JLabel("URL:"));
+        panelFormulario.add(txtUrl);
+        panelFormulario.add(new javax.swing.JLabel("Title:"));
+        panelFormulario.add(txtTitle);
+        panelFormulario.add(new javax.swing.JLabel("Text:"));
+        panelFormulario.add(txtText);
+        panelFormulario.add(new javax.swing.JLabel("Task:"));
+        panelFormulario.add(txtTask);
+
+        int result = JOptionPane.showConfirmDialog(null,panelFormulario,"Update Record #" + indexActual,JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String newID = txtPageID.getText().trim();
+            String newUrl = txtUrl.getText().trim();
+            String newTitle = txtTitle.getText().trim();
+            String newText = txtText.getText().trim();
+            String newTask = txtTask.getText().trim();
+
+            if (newID.isEmpty() || newUrl.isEmpty() || newTitle.isEmpty() || newText.isEmpty() || newTask.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "All fields are required.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            boolean sinCambios = newID.equals(pageIDActual)
+                    && newUrl.equals(urlActual)
+                    && newTitle.equals(titleActual)
+                    && newText.equals(textActual)
+                    && newTask.equals(taskActual);
+            if (sinCambios) {
+                JOptionPane.showMessageDialog(null, "No changes detected. Please modify at least one field.", "No Changes", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            this.manage.update(indexActual, newID, newUrl, newTitle, newText, newTask);
+            refreshTable();
+    }
+    }//GEN-LAST:event_UpdateActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Delete;

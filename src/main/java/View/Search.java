@@ -19,9 +19,13 @@ public class Search extends javax.swing.JPanel {
      * Creates new form Search
      */
     private Manage manage;
+    private CSV_Reader csv;
     
     public void setManage(Manage manage){
         this.manage = manage;
+    }
+    public void setCSV_Reader(CSV_Reader csv){
+        this.csv = csv;
     }
     public Search() {
         initComponents();
@@ -123,16 +127,13 @@ public class Search extends javax.swing.JPanel {
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
-        CSV_Reader read = new CSV_Reader();
-        List<WebPages> list = read.readFile("Pages_1000.csv");
+        List<WebPages> list = this.csv.readFile("Pages_1000.csv");
         
         String index = jTextField1.getText();
         String pageID = jTextField2.getText();
         
-        Manage manage = new Manage();
-        
-        List <WebPages> filter = manage.search(list, index, pageID);
-        manage.printTable(jTable1, filter);
+        List <WebPages> filter = this.manage.search(list, index, pageID);
+        this.manage.printTable(jTable1, filter);
         
     }//GEN-LAST:event_searchActionPerformed
 

@@ -16,73 +16,79 @@ import javax.swing.JOptionPane;
 /**
  * @author Eliana
  */
-public class Manage implements ManagerPageView{
-    
+public class Manage implements ManagerPageView {
+
     private List<WebPages> pages;
-    
-    public Manage(){
+
+    public Manage() {
         CSV_Reader read = new CSV_Reader();
         this.pages = read.readFile("Pages_1000.csv");
     }
+
     @Override
     public List<WebPages> pagesView() {
         return this.pages;
     }
+
     @Override
     public void printTable(JTable table, List<WebPages> list) {
-    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-    tableModel.setRowCount(0); // Limpia filas previas
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        tableModel.setRowCount(0); // Limpia filas previas
 
-    for (WebPages page : list) {
-        tableModel.addRow(new Object[]{
-            page.getIndex(),
-            page.getPageID(),
-            page.getUrl(),
-            page.getPageTitle(),
-            page.getPageText(),
-            page.getExtractionTask()
-        });
+        for (WebPages page : list) {
+            tableModel.addRow(new Object[]{
+                page.getIndex(),
+                page.getPageID(),
+                page.getUrl(),
+                page.getPageTitle(),
+                page.getPageText(),
+                page.getExtractionTask()
+            });
+        }
     }
-}
+
     public void printTable(JTable table) {
-    printTable(table, pagesView()); // Llama al método de arriba pasándole la lista completa
-}
+        printTable(table, pagesView()); // Llama al método de arriba pasándole la lista completa
+    }
+
     @Override
-    public List<WebPages> search(List<WebPages> list, String indexSearch, String pageIDSearch){
+    public List<WebPages> search(List<WebPages> list, String indexSearch, String pageIDSearch) {
         List<WebPages> result = new ArrayList();
-        
+
         String index = indexSearch.trim();
-        String pageID = pageIDSearch.trim().toLowerCase(); 
-        
-        for (WebPages page: list){
+        String pageID = pageIDSearch.trim().toLowerCase();
+
+        for (WebPages page : list) {
             boolean equalsIndex = index.isEmpty() || String.valueOf(page.getIndex()).equals(index);
             boolean equalsPageID = pageID.isEmpty() || page.getPageID().toLowerCase().contains(pageID);
-            
-            if (equalsIndex && equalsPageID){
+
+            if (equalsIndex && equalsPageID) {
                 result.add(page);
             }
         }
         return result;
     }
+
     @Override
-    public void clean(JTextField... fields){
-        for (JTextField field : fields){
-            if (field != null){
+    public void clean(JTextField... fields) {
+        for (JTextField field : fields) {
+            if (field != null) {
                 field.setText("");
             }
         }
     }
+
     @Override
-    public void register(String index, String pageID, String url, String pageTitle, String pageText, String extractionTask){
-        if (index.trim().isEmpty() || pageID.trim().isEmpty() || url.trim().isEmpty() || 
-        pageTitle.trim().isEmpty() || pageText.trim().isEmpty() || extractionTask.trim().isEmpty()) {
+    public void register(String index, String pageID, String url, String pageTitle, String pageText, String extractionTask) {
+        if (index.trim().isEmpty() || pageID.trim().isEmpty() || url.trim().isEmpty()
+                || pageTitle.trim().isEmpty() || pageText.trim().isEmpty() || extractionTask.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "All fields are required", "EMPTY FIELDS", JOptionPane.WARNING_MESSAGE);
             return;
         }
         try {
             int Index = Integer.parseInt(index);
-            for (WebPages page : this.pages){
-                if (page.getIndex() == Index){
+            for (WebPages page : this.pages) {
+                if (page.getIndex() == Index) {
                     JOptionPane.showMessageDialog(null, "The index (" + Index + ") is already registered, please use a different one", "DUPLICATE INDEX", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
@@ -92,18 +98,20 @@ public class Manage implements ManagerPageView{
             this.pages.sort(Comparator.comparingInt(WebPages::getIndex));
             addCSV();
             JOptionPane.showMessageDialog(null, "Data Successfully Added!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-            
-        } catch (NumberFormatException e){
+
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "The 'index' field must be a valid integer.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            
-        } catch (Exception e){
-            JOptionPane.showInternalMessageDialog(null, "An error occurred while saving: "+ e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showInternalMessageDialog(null, "An error occurred while saving: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public void addCSV(){
+
+    public void addCSV() {
         CSV_Reader save = new CSV_Reader();
         save.SaveCSV(this.pages);
     }
+
     @Override
     public void delete(String indexSearch, String pageIDSearch) {
         String index = indexSearch.trim();
@@ -130,16 +138,56 @@ public class Manage implements ManagerPageView{
             });
             if (delete) {
                 addCSV();
-                JOptionPane.showMessageDialog(null,"Record delete  successfully.","SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Record delete  successfully.", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null,"No record  was found matching the entered data.","NO MATCHES",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No record  was found matching the entered data.", "NO MATCHES", JOptionPane.WARNING_MESSAGE);
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "The 'index' field must be a valid integer.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error deleting the record: " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null,"The 'index' field must be a valid integer.", "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void update(int indexTarget, String newPageID, String newUrl, String newTitle, String newText, String newTask) {
+        try {
+            boolean encontrado = false;
+
+            // 1. Buscar la página por su Index en la lista en memoria
+            for (WebPages page : this.pages) { // 'pages' es tu lista (ej. ArrayList<WebPages>)
+                if (page.getIndex() == indexTarget) {
+                    page.setPageID(newPageID);
+                    page.setUrl(newUrl);
+                    page.setPageTitle(newTitle);
+                    page.setPageText(newText);
+                    page.setExtractionTask(newTask);
+                    encontrado = true;
+                    break; // Una vez encontrada y modificada, salimos del bucle
+                }
+            }
+
+            if (encontrado) {
+                // 2. Sobrescribir el archivo CSV con la lista actualizada
+                addCSV(); // Cambia 'guardarEnCSV()' por el nombre exacto de tu método de guardar
+
+                // 3. Confirmación al usuario
+                JOptionPane.showMessageDialog(null, "Record #" + indexTarget + " updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Record #" + indexTarget + " not found.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error updating record: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Error deleting the record: " + e.getMessage(),"ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void exportarTablaPDF(String rutaGuardar) {
+        try {
+            PDF pdfGenerator = new PDF();
+            pdfGenerator.generarReporteTabla(this.pages, rutaGuardar);
+
+            JOptionPane.showMessageDialog(null, "PDF generado con éxito en:\n" + rutaGuardar, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
